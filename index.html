@@ -1,0 +1,2108 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Protein & Meat Challenge</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #720000, #d35400);
+            padding: 15px;
+            color: #222;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 750px;
+            margin: 20px auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 22px;
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        h1 {
+            color: #8b0000;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 22px;
+            line-height: 1.45;
+            margin-bottom: 10px;
+        }
+
+        p {
+            line-height: 1.5;
+        }
+
+        /* =========================
+           TELA INICIAL
+        ========================= */
+
+        #start-screen {
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #555;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .translation {
+            color: #777;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .credits {
+            background: #f3f3f3;
+            border-radius: 15px;
+            padding: 18px;
+            margin: 20px 0;
+        }
+
+        .credits h3 {
+            color: #8b0000;
+            margin-bottom: 10px;
+        }
+
+        .credits p {
+            margin: 4px 0;
+        }
+
+        .nickname {
+            width: 100%;
+            padding: 15px;
+            margin-top: 10px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            font-size: 17px;
+            outline: none;
+        }
+
+        .nickname:focus {
+            border-color: #8b0000;
+        }
+
+        .main-button {
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 15px;
+            background: #8b0000;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .main-button:hover {
+            background: #b22222;
+            transform: translateY(-2px);
+        }
+
+        .message {
+            color: #8b0000;
+            font-weight: bold;
+            margin-top: 12px;
+        }
+
+        .info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .info-box {
+            background: #eeeeee;
+            border-radius: 10px;
+            padding: 10px 13px;
+            font-size: 14px;
+        }
+
+        /* =========================
+           RANKING
+        ========================= */
+
+        .ranking-title {
+            color: #8b0000;
+            margin-bottom: 5px;
+        }
+
+        .ranking-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .rank-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            background: #f3f3f3;
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        .rank-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .position {
+            width: 35px;
+            font-weight: bold;
+        }
+
+        .player-info {
+            min-width: 0;
+        }
+
+        .player-name {
+            font-weight: bold;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .player-level {
+            font-size: 13px;
+            color: #777;
+        }
+
+        .player-score {
+            color: #8b0000;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .empty-ranking {
+            color: #777;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .clear-ranking {
+            margin-top: 15px;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            background: #ddd;
+            cursor: pointer;
+        }
+
+        .clear-ranking:hover {
+            background: #ccc;
+        }
+
+        /* =========================
+           QUIZ
+        ========================= */
+
+        .quiz-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .level-badge {
+            background: #8b0000;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .question-number {
+            font-weight: bold;
+            color: #444;
+            font-size: 14px;
+        }
+
+        .timer {
+            min-width: 55px;
+            padding: 8px 12px;
+            border-radius: 20px;
+            background: #333;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .timer.warning {
+            background: #d35400;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 10px;
+            background: #ddd;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 25px;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: #8b0000;
+            transition: width 0.3s;
+        }
+
+        .question {
+            font-size: 22px;
+            line-height: 1.45;
+            margin-bottom: 10px;
+        }
+
+        .question-translation {
+            color: #777;
+            font-style: italic;
+            margin-bottom: 22px;
+        }
+
+        .answers {
+            display: grid;
+            gap: 12px;
+        }
+
+        .answer-button {
+            width: 100%;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 15px;
+            background: #fafafa;
+            color: #222;
+            font-size: 16px;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .answer-button:hover {
+            border-color: #8b0000;
+            background: #f8eeee;
+        }
+
+        .answer-button.correct {
+            background: #d7f7d4;
+            border-color: #32a852;
+        }
+
+        .answer-button.wrong {
+            background: #ffd7d7;
+            border-color: #d00000;
+        }
+
+        .answer-button.disabled {
+            cursor: not-allowed;
+        }
+
+        .feedback {
+            background: #f2f2f2;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 18px;
+            line-height: 1.5;
+        }
+
+        .next-button {
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 18px;
+            background: #333;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .next-button:hover {
+            background: #555;
+        }
+
+        /* =========================
+           RESULTADO
+        ========================= */
+
+        #result-screen {
+            text-align: center;
+        }
+
+        .result-icon {
+            font-size: 65px;
+            margin-bottom: 10px;
+        }
+
+        .result-score {
+            font-size: 60px;
+            font-weight: bold;
+            color: #8b0000;
+            margin: 15px 0;
+        }
+
+        .result-message {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .card {
+                padding: 20px 15px;
+                border-radius: 17px;
+            }
+
+            h1 {
+                font-size: 27px;
+            }
+
+            h2 {
+                font-size: 19px;
+            }
+
+            .logo {
+                font-size: 50px;
+            }
+
+            .question {
+                font-size: 19px;
+            }
+
+            .answer-button {
+                font-size: 15px;
+                padding: 14px;
+            }
+
+            .info {
+                flex-direction: column;
+            }
+
+            .info-box {
+                width: 100%;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- =========================
+         TELA INICIAL
+    ========================== -->
+
+    <div id="start-screen" class="card">
+
+        <div class="logo">
+            🥩🍗🥚
+        </div>
+
+        <h1>
+            Protein & Meat Challenge
+        </h1>
+
+        <p class="subtitle">
+            Test your knowledge about proteins and meats!
+        </p>
+
+        <p class="translation">
+            (Teste seus conhecimentos sobre proteínas e carnes!)
+        </p>
+
+
+        <div class="credits">
+
+            <h3>
+                Project Creators
+            </h3>
+
+            <p>Nicolas Ryan</p>
+            <p>Niltomar</p>
+            <p>João Guilherme</p>
+            <p>Richard Miguel</p>
+
+        </div>
+
+
+        <p>
+            Enter your nickname:
+            (Digite seu apelido:)
+        </p>
+
+
+        <input
+            id="nickname"
+            class="nickname"
+            type="text"
+            maxlength="20"
+            placeholder="Your nickname"
+        >
+
+
+        <div class="info">
+
+            <div class="info-box">
+                📝 10 Questions
+            </div>
+
+            <div class="info-box">
+                ⏱️ 20 Seconds
+            </div>
+
+            <div class="info-box">
+                🏆 3 Levels
+            </div>
+
+            <div class="info-box">
+                📱 Mobile
+            </div>
+
+        </div>
+
+
+        <button
+            id="start-button"
+            class="main-button"
+        >
+            Start Quiz
+            (Começar Quiz)
+        </button>
+
+
+        <p
+            id="start-message"
+            class="message"
+        ></p>
+
+    </div>
+
+
+    <!-- =========================
+         RANKING
+    ========================== -->
+
+    <div class="card">
+
+        <h2 class="ranking-title">
+            🏆 Ranking
+        </h2>
+
+        <p class="translation">
+            (Ranking salvo neste aparelho)
+        </p>
+
+
+        <div
+            id="ranking-list"
+            class="ranking-list"
+        ></div>
+
+
+        <button
+            id="clear-ranking"
+            class="clear-ranking"
+        >
+            Clear Ranking
+            (Apagar Ranking)
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         QUIZ
+    ========================== -->
+
+    <div
+        id="quiz-screen"
+        class="card hidden"
+    >
+
+        <div class="quiz-top">
+
+            <div
+                id="level-badge"
+                class="level-badge"
+            >
+                Level 1
+            </div>
+
+
+            <div
+                id="question-number"
+                class="question-number"
+            >
+                Question 1/10
+            </div>
+
+
+            <div
+                id="timer"
+                class="timer"
+            >
+                20
+            </div>
+
+        </div>
+
+
+        <div class="progress-container">
+
+            <div
+                id="progress-bar"
+                class="progress-bar"
+            ></div>
+
+        </div>
+
+
+        <h2
+            id="question"
+            class="question"
+        ></h2>
+
+
+        <p
+            id="question-translation"
+            class="question-translation"
+        ></p>
+
+
+        <div
+            id="answers"
+            class="answers"
+        ></div>
+
+
+        <div
+            id="feedback"
+            class="feedback hidden"
+        ></div>
+
+
+        <button
+            id="next-button"
+            class="next-button hidden"
+        >
+            Next Question
+            (Próxima Pergunta)
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         RESULTADO
+    ========================== -->
+
+    <div
+        id="result-screen"
+        class="card hidden"
+    >
+
+        <div
+            id="result-icon"
+            class="result-icon"
+        >
+            🎉
+        </div>
+
+
+        <h1>
+            Level Finished!
+        </h1>
+
+
+        <p class="translation">
+            (Nível finalizado!)
+        </p>
+
+
+        <p id="result-level">
+            Level 1
+        </p>
+
+
+        <div
+            id="result-score"
+            class="result-score"
+        >
+            0/10
+        </div>
+
+
+        <p id="result-points">
+            0 points
+        </p>
+
+
+        <p
+            id="result-message"
+            class="result-message"
+        ></p>
+
+
+        <button
+            id="continue-button"
+            class="main-button"
+        >
+            Continue
+        </button>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+    /* =====================================
+       PERGUNTAS
+    ====================================== */
+
+    const levels = {
+
+        1: [
+
+            {
+                question:
+                    "Which nutrient helps the body grow and repair tissues?",
+                translation:
+                    "(Qual nutriente ajuda o corpo a crescer e reparar os tecidos?)",
+                answers: [
+                    "Protein",
+                    "Sugar",
+                    "Salt",
+                    "Water"
+                ],
+                correct: "Protein"
+            },
+
+            {
+                question:
+                    "Which food is a plant-based source of protein?",
+                translation:
+                    "(Qual alimento é uma fonte de proteína vegetal?)",
+                answers: [
+                    "Beans",
+                    "Beef",
+                    "Chicken",
+                    "Fish"
+                ],
+                correct: "Beans"
+            },
+
+            {
+                question:
+                    "Which of these is a red meat?",
+                translation:
+                    "(Qual destes é uma carne vermelha?)",
+                answers: [
+                    "Beef",
+                    "Salmon",
+                    "Eggs",
+                    "Beans"
+                ],
+                correct: "Beef"
+            },
+
+            {
+                question:
+                    "Which food commonly contains protein?",
+                translation:
+                    "(Qual alimento normalmente contém proteína?)",
+                answers: [
+                    "Eggs",
+                    "Candy",
+                    "Soda",
+                    "Juice"
+                ],
+                correct: "Eggs"
+            },
+
+            {
+                question:
+                    "Which meat comes from pigs?",
+                translation:
+                    "(Qual carne vem dos porcos?)",
+                answers: [
+                    "Pork",
+                    "Beef",
+                    "Chicken",
+                    "Fish"
+                ],
+                correct: "Pork"
+            },
+
+            {
+                question:
+                    "Which meat comes from cows?",
+                translation:
+                    "(Qual carne vem das vacas?)",
+                answers: [
+                    "Beef",
+                    "Pork",
+                    "Chicken",
+                    "Fish"
+                ],
+                correct: "Beef"
+            },
+
+            {
+                question:
+                    "Which meat comes from chickens?",
+                translation:
+                    "(Qual carne vem das galinhas ou frangos?)",
+                answers: [
+                    "Chicken",
+                    "Beef",
+                    "Pork",
+                    "Fish"
+                ],
+                correct: "Chicken"
+            },
+
+            {
+                question:
+                    "Which food is a legume that provides protein?",
+                translation:
+                    "(Qual alimento é uma leguminosa que fornece proteína?)",
+                answers: [
+                    "Lentils",
+                    "Candy",
+                    "Soda",
+                    "Butter"
+                ],
+                correct: "Lentils"
+            },
+
+            {
+                question:
+                    "Which of these is a type of fish?",
+                translation:
+                    "(Qual destes é um tipo de peixe?)",
+                answers: [
+                    "Salmon",
+                    "Beef",
+                    "Chicken",
+                    "Pork"
+                ],
+                correct: "Salmon"
+            },
+
+            {
+                question:
+                    "Which of these is NOT a meat?",
+                translation:
+                    "(Qual destes NÃO é uma carne?)",
+                answers: [
+                    "Beans",
+                    "Beef",
+                    "Chicken",
+                    "Pork"
+                ],
+                correct: "Beans"
+            }
+        ],
+
+
+        2: [
+
+            {
+                question:
+                    "What are proteins made from?",
+                translation:
+                    "(Do que as proteínas são formadas?)",
+                answers: [
+                    "Amino acids",
+                    "Only water",
+                    "Only sugar",
+                    "Only salt"
+                ],
+                correct: "Amino acids"
+            },
+
+            {
+                question:
+                    "Which option contains only animal protein sources?",
+                translation:
+                    "(Qual opção contém apenas fontes de proteína animal?)",
+                answers: [
+                    "Eggs, fish and chicken",
+                    "Beans, rice and lentils",
+                    "Rice, beans and peas",
+                    "Lentils, beans and rice"
+                ],
+                correct: "Eggs, fish and chicken"
+            },
+
+            {
+                question:
+                    "Which word means meat from pigs?",
+                translation:
+                    "(Qual palavra significa carne de porco?)",
+                answers: [
+                    "Pork",
+                    "Beef",
+                    "Chicken",
+                    "Salmon"
+                ],
+                correct: "Pork"
+            },
+
+            {
+                question:
+                    "Which word means meat from cattle?",
+                translation:
+                    "(Qual palavra significa carne de gado?)",
+                answers: [
+                    "Beef",
+                    "Pork",
+                    "Chicken",
+                    "Fish"
+                ],
+                correct: "Beef"
+            },
+
+            {
+                question:
+                    "Which of these is a plant protein source?",
+                translation:
+                    "(Qual destas é uma fonte de proteína vegetal?)",
+                answers: [
+                    "Lentils",
+                    "Chicken",
+                    "Beef",
+                    "Eggs"
+                ],
+                correct: "Lentils"
+            },
+
+            {
+                question:
+                    "Which food belongs to the legume family?",
+                translation:
+                    "(Qual alimento pertence à família das leguminosas?)",
+                answers: [
+                    "Beans",
+                    "Chicken",
+                    "Fish",
+                    "Eggs"
+                ],
+                correct: "Beans"
+            },
+
+            {
+                question:
+                    "Which statement about protein is correct?",
+                translation:
+                    "(Qual afirmação sobre proteínas está correta?)",
+                answers: [
+                    "Protein is found in animal and plant foods",
+                    "Protein only exists in meat",
+                    "Protein only exists in vegetables",
+                    "Protein is only found in drinks"
+                ],
+                correct: "Protein is found in animal and plant foods"
+            },
+
+            {
+                question:
+                    "Which food is obtained from an animal?",
+                translation:
+                    "(Qual alimento é obtido de um animal?)",
+                answers: [
+                    "Eggs",
+                    "Lentils",
+                    "Beans",
+                    "Rice"
+                ],
+                correct: "Eggs"
+            },
+
+            {
+                question:
+                    "Which food comes from fish and is a protein source?",
+                translation:
+                    "(Qual alimento vem de peixe e é uma fonte de proteína?)",
+                answers: [
+                    "Salmon",
+                    "Beef",
+                    "Pork",
+                    "Beans"
+                ],
+                correct: "Salmon"
+            },
+
+            {
+                question:
+                    "Which nutrient is made up of amino acids?",
+                translation:
+                    "(Qual nutriente é formado por aminoácidos?)",
+                answers: [
+                    "Protein",
+                    "Water",
+                    "Salt",
+                    "Sugar"
+                ],
+                correct: "Protein"
+            }
+        ],
+
+
+        3: [
+
+            {
+                question:
+                    "What are amino acids often called in relation to proteins?",
+                translation:
+                    "(Como os aminoácidos são chamados em relação às proteínas?)",
+                answers: [
+                    "Building blocks of proteins",
+                    "Types of sugar",
+                    "Types of meat",
+                    "Types of vitamins"
+                ],
+                correct: "Building blocks of proteins"
+            },
+
+            {
+                question:
+                    "Which comparison between animal and plant protein sources is correct?",
+                translation:
+                    "(Qual comparação entre fontes de proteína animal e vegetal está correta?)",
+                answers: [
+                    "Both can provide protein",
+                    "Only animals provide protein",
+                    "Only plants provide protein",
+                    "Neither provides protein"
+                ],
+                correct: "Both can provide protein"
+            },
+
+            {
+                question:
+                    "Which option contains two plant-based protein sources?",
+                translation:
+                    "(Qual opção contém duas fontes de proteína vegetal?)",
+                answers: [
+                    "Beans and lentils",
+                    "Beef and chicken",
+                    "Eggs and fish",
+                    "Pork and beef"
+                ],
+                correct: "Beans and lentils"
+            },
+
+            {
+                question:
+                    "Which food is classified as a legume?",
+                translation:
+                    "(Qual alimento é classificado como uma leguminosa?)",
+                answers: [
+                    "Lentils",
+                    "Beef",
+                    "Chicken",
+                    "Salmon"
+                ],
+                correct: "Lentils"
+            },
+
+            {
+                question:
+                    "Which of these is an example of animal protein?",
+                translation:
+                    "(Qual destes é um exemplo de proteína animal?)",
+                answers: [
+                    "Chicken",
+                    "Beans",
+                    "Lentils",
+                    "Rice"
+                ],
+                correct: "Chicken"
+            },
+
+            {
+                question:
+                    "Which statement about protein sources is correct?",
+                translation:
+                    "(Qual afirmação sobre fontes de proteína está correta?)",
+                answers: [
+                    "Protein can come from many foods",
+                    "Protein only comes from beef",
+                    "Protein only comes from fish",
+                    "Protein only comes from eggs"
+                ],
+                correct: "Protein can come from many foods"
+            },
+
+            {
+                question:
+                    "Which word specifically means meat from pigs?",
+                translation:
+                    "(Qual palavra significa especificamente carne de porco?)",
+                answers: [
+                    "Pork",
+                    "Beef",
+                    "Chicken",
+                    "Fish"
+                ],
+                correct: "Pork"
+            },
+
+            {
+                question:
+                    "Which word specifically means meat from cattle?",
+                translation:
+                    "(Qual palavra significa especificamente carne de gado?)",
+                answers: [
+                    "Beef",
+                    "Pork",
+                    "Chicken",
+                    "Fish"
+                ],
+                correct: "Beef"
+            },
+
+            {
+                question:
+                    "Which nutrient contains amino acids?",
+                translation:
+                    "(Qual nutriente contém aminoácidos?)",
+                answers: [
+                    "Protein",
+                    "Water",
+                    "Salt",
+                    "Sugar"
+                ],
+                correct: "Protein"
+            },
+
+            {
+                question:
+                    "Which pair contains different types of protein sources?",
+                translation:
+                    "(Qual dupla contém diferentes tipos de fontes de proteína?)",
+                answers: [
+                    "Beans and eggs",
+                    "Beef and pork",
+                    "Chicken and fish",
+                    "Candy and soda"
+                ],
+                correct: "Beans and eggs"
+            }
+        ]
+
+    };
+
+
+    /* =====================================
+       VARIÁVEIS
+    ====================================== */
+
+    let nickname = "";
+    let currentLevel = 1;
+    let currentQuestion = 0;
+    let currentScore = 0;
+    let totalPoints = 0;
+    let timeLeft = 20;
+    let timer;
+
+
+    /* =====================================
+       ELEMENTOS
+    ====================================== */
+
+    const startScreen =
+        document.getElementById("start-screen");
+
+    const quizScreen =
+        document.getElementById("quiz-screen");
+
+    const resultScreen =
+        document.getElementById("result-screen");
+
+    const nicknameInput =
+        document.getElementById("nickname");
+
+    const startButton =
+        document.getElementById("start-button");
+
+    const startMessage =
+        document.getElementById("start-message");
+
+    const rankingList =
+        document.getElementById("ranking-list");
+
+    const clearRankingButton =
+        document.getElementById("clear-ranking");
+
+    const levelBadge =
+        document.getElementById("level-badge");
+
+    const questionNumber =
+        document.getElementById("question-number");
+
+    const timerElement =
+        document.getElementById("timer");
+
+    const progressBar =
+        document.getElementById("progress-bar");
+
+    const questionElement =
+        document.getElementById("question");
+
+    const questionTranslation =
+        document.getElementById("question-translation");
+
+    const answersElement =
+        document.getElementById("answers");
+
+    const feedbackElement =
+        document.getElementById("feedback");
+
+    const nextButton =
+        document.getElementById("next-button");
+
+    const resultIcon =
+        document.getElementById("result-icon");
+
+    const resultLevel =
+        document.getElementById("result-level");
+
+    const resultScore =
+        document.getElementById("result-score");
+
+    const resultPoints =
+        document.getElementById("result-points");
+
+    const resultMessage =
+        document.getElementById("result-message");
+
+    const continueButton =
+        document.getElementById("continue-button");
+
+
+    /* =====================================
+       EMBARALHAR
+    ====================================== */
+
+    function shuffle(array) {
+
+        for (
+            let i = array.length - 1;
+            i > 0;
+            i--
+        ) {
+
+            const j =
+                Math.floor(
+                    Math.random() * (i + 1)
+                );
+
+            [array[i], array[j]] =
+                [array[j], array[i]];
+        }
+
+        return array;
+    }
+
+
+    /* =====================================
+       RANKING LOCAL
+    ====================================== */
+
+    function getRanking() {
+
+        try {
+
+            const data =
+                localStorage.getItem(
+                    "proteinMeatRanking"
+                );
+
+            return data
+                ? JSON.parse(data)
+                : [];
+
+        } catch (error) {
+
+            return [];
+        }
+    }
+
+
+    function saveRanking() {
+
+        const ranking =
+            getRanking();
+
+        const existingIndex =
+            ranking.findIndex(
+                player =>
+                    player.nickname.toLowerCase() ===
+                    nickname.toLowerCase()
+            );
+
+
+        const playerData = {
+
+            nickname: nickname,
+
+            level: currentLevel,
+
+            totalPoints: totalPoints,
+
+            date: Date.now()
+
+        };
+
+
+        if (
+            existingIndex !== -1
+        ) {
+
+            if (
+                totalPoints >
+                ranking[existingIndex].totalPoints
+            ) {
+
+                ranking[existingIndex] =
+                    playerData;
+            }
+
+        } else {
+
+            ranking.push(
+                playerData
+            );
+        }
+
+
+        ranking.sort(
+            (a, b) =>
+                b.totalPoints -
+                a.totalPoints
+        );
+
+
+        try {
+
+            localStorage.setItem(
+                "proteinMeatRanking",
+                JSON.stringify(ranking)
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Could not save ranking.",
+                error
+            );
+        }
+
+
+        showRanking();
+    }
+
+
+    function showRanking() {
+
+        const ranking =
+            getRanking();
+
+
+        if (
+            ranking.length === 0
+        ) {
+
+            rankingList.innerHTML = `
+                <p class="empty-ranking">
+                    No players yet.<br>
+                    (Ainda não há jogadores.)
+                </p>
+            `;
+
+            return;
+        }
+
+
+        rankingList.innerHTML = "";
+
+
+        ranking
+            .slice(0, 20)
+            .forEach(
+                (player, index) => {
+
+                    const item =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    item.className =
+                        "rank-item";
+
+
+                    item.innerHTML = `
+
+                        <div class="rank-left">
+
+                            <div class="position">
+                                #${index + 1}
+                            </div>
+
+                            <div class="player-info">
+
+                                <div class="player-name">
+                                    ${escapeHTML(player.nickname)}
+                                </div>
+
+                                <div class="player-level">
+                                    Level ${player.level}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="player-score">
+                            ${player.totalPoints} pts
+                        </div>
+
+                    `;
+
+
+                    rankingList.appendChild(
+                        item
+                    );
+
+                }
+            );
+
+    }
+
+
+    function escapeHTML(text) {
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+        div.textContent =
+            text;
+
+        return div.innerHTML;
+    }
+
+
+    /* =====================================
+       APAGAR RANKING
+    ====================================== */
+
+    clearRankingButton.addEventListener(
+        "click",
+        () => {
+
+            const confirmClear =
+                confirm(
+                    "Are you sure you want to clear the ranking? (Tem certeza que deseja apagar o ranking?)"
+                );
+
+
+            if (
+                confirmClear
+            ) {
+
+                localStorage.removeItem(
+                    "proteinMeatRanking"
+                );
+
+                showRanking();
+            }
+
+        }
+    );
+
+
+    /* =====================================
+       INICIAR QUIZ
+    ====================================== */
+
+    startButton.addEventListener(
+        "click",
+        startQuiz
+    );
+
+
+    function startQuiz() {
+
+        nickname =
+            nicknameInput.value.trim();
+
+
+        if (
+            nickname.length < 2
+        ) {
+
+            startMessage.textContent =
+                "Please enter at least 2 characters. (Digite pelo menos 2 caracteres.)";
+
+            return;
+        }
+
+
+        currentLevel = 1;
+
+        currentQuestion = 0;
+
+        currentScore = 0;
+
+        totalPoints = 0;
+
+
+        startMessage.textContent =
+            "";
+
+
+        startScreen.classList.add(
+            "hidden"
+        );
+
+
+        quizScreen.classList.remove(
+            "hidden"
+        );
+
+
+        showQuestion();
+    }
+
+
+    /* =====================================
+       MOSTRAR PERGUNTA
+    ====================================== */
+
+    function showQuestion() {
+
+        clearInterval(timer);
+
+
+        const questionList =
+            levels[currentLevel];
+
+
+        const question =
+            questionList[currentQuestion];
+
+
+        timeLeft = 20;
+
+
+        timerElement.textContent =
+            timeLeft;
+
+
+        timerElement.classList.remove(
+            "warning"
+        );
+
+
+        levelBadge.textContent =
+            "Level " +
+            currentLevel;
+
+
+        questionNumber.textContent =
+            "Question " +
+            (currentQuestion + 1) +
+            "/10";
+
+
+        progressBar.style.width =
+            (
+                currentQuestion * 10
+            ) +
+            "%";
+
+
+        questionElement.textContent =
+            question.question;
+
+
+        questionTranslation.textContent =
+            question.translation;
+
+
+        answersElement.innerHTML =
+            "";
+
+
+        feedbackElement.classList.add(
+            "hidden"
+        );
+
+
+        nextButton.classList.add(
+            "hidden"
+        );
+
+
+        const answers =
+            shuffle([
+                ...question.answers
+            ]);
+
+
+        answers.forEach(
+            answer => {
+
+                const button =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                button.className =
+                    "answer-button";
+
+
+                button.textContent =
+                    answer;
+
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        selectAnswer(
+                            button,
+                            answer
+                        );
+
+                    }
+                );
+
+
+                answersElement.appendChild(
+                    button
+                );
+
+            }
+        );
+
+
+        startTimer();
+    }
+
+
+    /* =====================================
+       TIMER
+    ====================================== */
+
+    function startTimer() {
+
+        timer =
+            setInterval(
+                () => {
+
+                    timeLeft--;
+
+                    timerElement.textContent =
+                        timeLeft;
+
+
+                    if (
+                        timeLeft <= 5
+                    ) {
+
+                        timerElement.classList.add(
+                            "warning"
+                        );
+
+                    }
+
+
+                    if (
+                        timeLeft <= 0
+                    ) {
+
+                        clearInterval(
+                            timer
+                        );
+
+                        timeIsOver();
+                    }
+
+                },
+                1000
+            );
+    }
+
+
+    /* =====================================
+       TEMPO ACABOU
+    ====================================== */
+
+    function timeIsOver() {
+
+        const question =
+            levels[currentLevel]
+            [currentQuestion];
+
+
+        const buttons =
+            document.querySelectorAll(
+                ".answer-button"
+            );
+
+
+        buttons.forEach(
+            button => {
+
+                button.disabled =
+                    true;
+
+                button.classList.add(
+                    "disabled"
+                );
+
+
+                if (
+                    button.textContent ===
+                    question.correct
+                ) {
+
+                    button.classList.add(
+                        "correct"
+                    );
+
+                }
+
+            }
+        );
+
+
+        feedbackElement.textContent =
+            "Time is over! The correct answer was " +
+            question.correct +
+            ". (O tempo acabou! A resposta correta era " +
+            question.correct +
+            ".)";
+
+
+        feedbackElement.classList.remove(
+            "hidden"
+        );
+
+
+        nextButton.classList.remove(
+            "hidden"
+        );
+    }
+
+
+    /* =====================================
+       RESPOSTA
+    ====================================== */
+
+    function selectAnswer(
+        selectedButton,
+        selectedAnswer
+    ) {
+
+        clearInterval(timer);
+
+
+        const question =
+            levels[currentLevel]
+            [currentQuestion];
+
+
+        const buttons =
+            document.querySelectorAll(
+                ".answer-button"
+            );
+
+
+        buttons.forEach(
+            button => {
+
+                button.disabled =
+                    true;
+
+                button.classList.add(
+                    "disabled"
+                );
+
+
+                if (
+                    button.textContent ===
+                    question.correct
+                ) {
+
+                    button.classList.add(
+                        "correct"
+                    );
+
+                }
+
+            }
+        );
+
+
+        if (
+            selectedAnswer ===
+            question.correct
+        ) {
+
+            currentScore++;
+
+
+            let points = 10;
+
+
+            if (
+                currentLevel === 2
+            ) {
+
+                points = 20;
+
+            }
+
+
+            if (
+                currentLevel === 3
+            ) {
+
+                points = 30;
+
+            }
+
+
+            totalPoints +=
+                points;
+
+
+            selectedButton.classList.add(
+                "correct"
+            );
+
+
+            feedbackElement.textContent =
+                "Correct! +" +
+                points +
+                " points. (Correto! +" +
+                points +
+                " pontos.)";
+
+        }
+
+        else {
+
+            selectedButton.classList.add(
+                "wrong"
+            );
+
+
+            feedbackElement.textContent =
+                "Wrong answer. (Resposta errada.) " +
+                "Correct answer: " +
+                question.correct;
+        }
+
+
+        feedbackElement.classList.remove(
+            "hidden"
+        );
+
+
+        nextButton.classList.remove(
+            "hidden"
+        );
+    }
+
+
+    /* =====================================
+       PRÓXIMA PERGUNTA
+    ====================================== */
+
+    nextButton.addEventListener(
+        "click",
+        () => {
+
+            currentQuestion++;
+
+
+            if (
+                currentQuestion < 10
+            ) {
+
+                showQuestion();
+
+            }
+
+            else {
+
+                finishLevel();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================
+       FINAL DO NÍVEL
+    ====================================== */
+
+    function finishLevel() {
+
+        clearInterval(timer);
+
+
+        progressBar.style.width =
+            "100%";
+
+
+        quizScreen.classList.add(
+            "hidden"
+        );
+
+
+        resultScreen.classList.remove(
+            "hidden"
+        );
+
+
+        resultLevel.textContent =
+            "Level " +
+            currentLevel;
+
+
+        resultScore.textContent =
+            currentScore +
+            "/10";
+
+
+        resultPoints.textContent =
+            "Total points: " +
+            totalPoints +
+            " (Pontos totais: " +
+            totalPoints +
+            ")";
+
+
+        /*
+        ==============================
+        10/10
+        ==============================
+        */
+
+        if (
+            currentScore === 10
+        ) {
+
+            resultIcon.textContent =
+                "🏆";
+
+
+            if (
+                currentLevel < 3
+            ) {
+
+                resultMessage.textContent =
+                    "Perfect! You unlocked the next level! (Perfeito! Você desbloqueou o próximo nível!)";
+
+
+                continueButton.textContent =
+                    "Go to Level " +
+                    (currentLevel + 1);
+
+            }
+
+            else {
+
+                resultMessage.textContent =
+                    "Amazing! You completed all levels! (Incrível! Você completou todos os níveis!)";
+
+
+                continueButton.textContent =
+                    "Play Again";
+            }
+
+        }
+
+        else {
+
+            resultIcon.textContent =
+                "📚";
+
+
+            resultMessage.textContent =
+                "You need 10/10 to unlock the next level. (Você precisa fazer 10/10 para desbloquear o próximo nível.)";
+
+
+            continueButton.textContent =
+                "Try Again";
+        }
+
+
+        saveRanking();
+    }
+
+
+    /* =====================================
+       CONTINUAR
+    ====================================== */
+
+    continueButton.addEventListener(
+        "click",
+        continueGame
+    );
+
+
+    function continueGame() {
+
+        resultScreen.classList.add(
+            "hidden"
+        );
+
+
+        /*
+        ==============================
+        PASSOU
+        ==============================
+        */
+
+        if (
+            currentScore === 10
+        ) {
+
+            if (
+                currentLevel < 3
+            ) {
+
+                currentLevel++;
+
+                currentQuestion = 0;
+
+                currentScore = 0;
+
+
+                quizScreen.classList.remove(
+                    "hidden"
+                );
+
+
+                showQuestion();
+
+            }
+
+            else {
+
+                startScreen.classList.remove(
+                    "hidden"
+                );
+
+                showRanking();
+            }
+
+        }
+
+        /*
+        ==============================
+        NÃO PASSOU
+        ==============================
+        */
+
+        else {
+
+            currentQuestion = 0;
+
+            currentScore = 0;
+
+
+            quizScreen.classList.remove(
+                "hidden"
+            );
+
+
+            showQuestion();
+        }
+    }
+
+
+    /* =====================================
+       MOSTRAR RANKING AO ABRIR
+    ====================================== */
+
+    showRanking();
+
+
+</script>
+
+</body>
+
+</html>
+```
